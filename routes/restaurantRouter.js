@@ -10,9 +10,12 @@ restaurantRouter.get('/locations', cb.getLocations)
 //List of restaurants
 restaurantRouter.get('/restaurant', cb.getRestaurantData)
 
+//mealType
+restaurantRouter.get('/meals', cb.getMealType)
+
 //
+ restaurantRouter.get('/filter/:mealId',cb.getFilteredData)
 // restaurantRouter.put('/getData',)
-// restaurantRouter.get('/getData',)
 
 
 
