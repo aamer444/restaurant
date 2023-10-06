@@ -19,5 +19,12 @@
 >http://localhost:8000/filter/4?cuisineId=2
 * Restaurants wrt mealType + cost
 >http://localhost:8000/filter/4?hcost=1000&lcost=200
->
+>http://localhost:8000/filter/4?hcost=1000&lcost=200&cusineId=4
 * Sort on the basis of price 
+>http://localhost:8000/filter/4?hcost=10000&lcost=200&sort=-1
+* Pagination
+>http://localhost:8000/filter/4?cusineId=4&skip=0&limit=5
+
+
+
+

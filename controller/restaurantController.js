@@ -63,13 +63,21 @@ export const getMealType = async (req, res) => {
 export const getFilteredData = async (req, res) => {
     try {
         let query = {}
-        let sort = {}
+        let sort = { cost: 1 }
         let skip = 0
         let limit = 100000
         let mealId = Number(req.params.mealId)
         let cuisineId = Number(req.query.cuisineId)
         let hCost = Number(req.query.hcost)
         let lCost = Number(req.query.lcost)
+
+        if (req.query.skip && req.query.limit) {
+            skip = Number(req.query.skip)
+            limit = Number(req.query.limit)
+        }
+        if (req.query.sort) {
+            sort = { cost: Number(req.query.sort) }
+        }
 
         if (cuisineId && hCost && lCost) {
             query = {
@@ -85,10 +93,10 @@ export const getFilteredData = async (req, res) => {
         } else if (hCost && lCost) {
             query = {
                 'mealTypes.mealtype_id': mealId,
-                $and: [{ cost: { $gt: hCost, $lt: lCost } }]
+                $and: [{ cost: { $gt: lCost, $lt: hCost } }]
             }
         }
-        let data = await restaurantDataModel.find(query)
+        let data = await restaurantDataModel.find(query).sort(sort).skip(skip).limit(limit)
         successRes(res, 200, data)
     } catch (error) {
         failureRes(res, 400, error)
