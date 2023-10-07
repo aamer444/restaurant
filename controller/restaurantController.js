@@ -1,3 +1,4 @@
+import { mongo } from "mongoose";
 import locationModel from "../model/locationModel.js";
 import mealTypeModel from "../model/mealTypeModel.js";
 import restaurantDataModel from "../model/restaurantData.js";
@@ -101,5 +102,21 @@ export const getFilteredData = async (req, res) => {
     } catch (error) {
         failureRes(res, 400, error)
         console.log(error.message);
+    }
+}
+
+
+export const getDetailsData = async (req, res) => {
+    try {
+        let _id = req.params.id
+
+        // console.log(_id);
+        let query = { _id: _id }
+        let data = await restaurantDataModel.find(query)
+        console.log(data);
+        successRes(res, 200, data)
+    } catch (error) {
+        console.log(error.message);
+        failureRes(res, 400, error)
     }
 }

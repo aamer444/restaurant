@@ -27,4 +27,6 @@
 
 
 
-
+//Page 3
+* Details of the restaurants
+>

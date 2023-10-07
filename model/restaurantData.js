@@ -23,7 +23,7 @@ let schema = mongoose.Schema({
     address: String,
     contact_number: Number,
     mealTypes: [mealTypesSchema],
-     cuisines: [cuisinesSchema],
+    cuisines: [cuisinesSchema],
     image_gallery: Array
 })
 
