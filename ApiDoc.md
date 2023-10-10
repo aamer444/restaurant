@@ -29,4 +29,10 @@
 
 //Page 3
 * Details of the restaurants
+>http://localhost:8000/details/651d6eea83daea33e50c1721
+* Menu wrt to restaurants
+>http://localhost:8000/menu/1
+
+//Page 4
+* Details of selected Menu
 >

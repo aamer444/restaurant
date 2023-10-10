@@ -3,6 +3,7 @@ import locationModel from "../model/locationModel.js";
 import mealTypeModel from "../model/mealTypeModel.js";
 import restaurantDataModel from "../model/restaurantData.js";
 import { failureRes, successRes } from "../utils/responseFunctions.js";
+import restaurantMenuModel from "../model/restaurantMenu.js";
 
 
 
@@ -105,7 +106,7 @@ export const getFilteredData = async (req, res) => {
     }
 }
 
-
+//  details
 export const getDetailsData = async (req, res) => {
     try {
         let _id = req.params.id
@@ -117,6 +118,19 @@ export const getDetailsData = async (req, res) => {
         successRes(res, 200, data)
     } catch (error) {
         console.log(error.message);
+        failureRes(res, 400, error)
+    }
+}
+
+////menu wrt to restaurants
+
+export const getMenuWithId = async (req, res) => {
+    try {
+        let id = Number(req.params.id)
+        let query = { restaurant_id: id }
+        let data = await restaurantMenuModel.find(query)
+        successRes(res, 200, data)
+    } catch (error) {
         failureRes(res, 400, error)
     }
 }

@@ -16,9 +16,12 @@ restaurantRouter.get('/meals', cb.getMealType)
 //filter data by cusineId && mealId  pagination  etc
 restaurantRouter.get('/filter/:mealId', cb.getFilteredData)
 
-//
+// details  
 restaurantRouter.get('/details/:id', cb.getDetailsData)
-// restaurantRouter.put('/getData',)
+
+//menu wrt to restaurants
+restaurantRouter.get('/menu/:id', cb.getMenuWithId)
+
 
 
 
