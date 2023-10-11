@@ -35,4 +35,45 @@
 
 //Page 4
 * Details of selected Menu
->
+>http://localhost:8000/menuDetails
+{"id":[1,2,3]}
+* Place Order
+>(POST) http://localhost:8000/placeOrder
+{
+    "name":"mazhar",
+    "email":"mazhar@gmail.com",
+    "address":"pune",
+    "phone":9957884878,
+    "cost":300,
+    "menuItem":[34,26,17],
+    "status":"pending"
+
+}
+
+
+
+//Page 5
+* View All order/ With or without email
+>http://localhost:8000/orders?email=anchal@gmail.com
+>http://localhost:8000/orders
+* Update order details
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

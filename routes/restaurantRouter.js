@@ -22,6 +22,17 @@ restaurantRouter.get('/details/:id', cb.getDetailsData)
 //menu wrt to restaurants
 restaurantRouter.get('/menu/:id', cb.getMenuWithId)
 
+// orders
+restaurantRouter.get("/orders", cb.getOrders)
+
+//placeOrder
+restaurantRouter.post('/placeOrder', cb.placeOrder)
+
+//Menu Details
+restaurantRouter.get('/menuDetails', cb.getMenuDetails)
+
+//update order
+restaurantRouter.put("/updateOrder/:id",cb.updateOrder)
 
 
 

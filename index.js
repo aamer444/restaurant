@@ -14,9 +14,9 @@ const port = PORT || 8080
 // connection to mongoDB
 connectionDB(URL, DBNAME)
 
-app.use(bodyParser.urlencoded({extended:true}))
-app.use(bodyParser.json())
-
+// app.use(bodyParser.urlencoded({extended:true}))
+// app.use(bodyParser.json())
+app.use(express.json())
 
 // health check
 
@@ -29,7 +29,6 @@ app.get("/health", (req, res) => {
 
 
 // all req incoming rout
-
 app.use("/", restaurantRouter)
 
 
@@ -42,8 +41,6 @@ app.listen(port, (err) => {
         console.log(`       server started at  http://localhost:${port}
        health check url is http://localhost:${port}/health  `);
     }
-
-
 })
 
 

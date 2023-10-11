@@ -1,9 +1,10 @@
-import { mongo } from "mongoose";
+import mongoose, { mongo } from "mongoose";
 import locationModel from "../model/locationModel.js";
 import mealTypeModel from "../model/mealTypeModel.js";
 import restaurantDataModel from "../model/restaurantData.js";
 import { failureRes, successRes } from "../utils/responseFunctions.js";
 import restaurantMenuModel from "../model/restaurantMenu.js";
+import ordersModel from "../model/orders.js";
 
 
 
@@ -131,6 +132,72 @@ export const getMenuWithId = async (req, res) => {
         let data = await restaurantMenuModel.find(query)
         successRes(res, 200, data)
     } catch (error) {
+        failureRes(res, 400, error)
+    }
+}
+
+//placeOrder
+export const placeOrder = async (req, res) => {
+    try {
+        let data = req.body
+        console.log(data);
+        let response = await ordersModel(data)
+        await response.save()
+        successRes(res, 201, response)
+    } catch (error) {
+        failureRes(res, 400, error)
+    }
+}
+
+// menu details {"id":[4,3,2]}
+export const getMenuDetails = async (req, res) => {
+    try {
+        let query = {}
+        if (Array.isArray(req.body.id)) {
+            query = { menu_id: { $in: req.body.id } }
+            let data = await restaurantMenuModel.find(query)
+            successRes(res, 200, data)
+        } else {
+            failureRes(res, 400, "please pass data as Array like {'id':[4,6,12]} ")
+        }
+    } catch (error) {
+        failureRes(res, 400, error)
+    }
+}
+
+//orders
+export const getOrders = async (req, res) => {
+    try {
+        let query = {}
+        if (req.query.email) {
+            query = { email: req.query.email }
+        }
+        let data = await ordersModel.find(query)
+        successRes(res, 200, data)
+    } catch (error) {
+        failureRes(res, 400, error)
+    }
+}
+
+export const updateOrder = async (req, res) => {
+    try {
+        let identifier = req.params.id
+        let result;
+        // let condition = { _id: id }
+        let data = req.body
+        // let result = await ordersModel.findByIdAndUpdate({_id:id}, data, { new: true })
+        // console.log(result);
+        // if (mongoose.Types.ObjectId.isValid(identifier)) {
+            // Handle ObjectId case (update by ObjectId)
+            result = await ordersModel.findByIdAndUpdate({ _id: identifier }, data, { new: true });
+        // } else {
+        //     // Handle custom '_id' field case (update by custom '_id' field)
+        //     result = await ordersModel.findOneAndUpdate({ _id: identifier }, data, { new: true });
+        // }
+
+        successRes(res, 200, result)
+    } catch (error) {
+        console.log(error);
         failureRes(res, 400, error)
     }
 }
