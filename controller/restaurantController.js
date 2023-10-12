@@ -181,11 +181,11 @@ export const getOrders = async (req, res) => {
 
 export const updateOrder = async (req, res) => {
     try {
-        let identifier = req.params.id
+        let id = req.params.id
         let result;
         let condition = { _id: id }
         let data = req.body
-        result = await ordersModel.findByIdAndUpdate({ _id: _id }, data, { new: true });
+        result = await ordersModel.findByIdAndUpdate(condition, data, { new: true });
         successRes(res, 200, result)
     } catch (error) {
         console.log(error);
