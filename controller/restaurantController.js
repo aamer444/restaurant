@@ -183,18 +183,9 @@ export const updateOrder = async (req, res) => {
     try {
         let identifier = req.params.id
         let result;
-        // let condition = { _id: id }
+        let condition = { _id: id }
         let data = req.body
-        // let result = await ordersModel.findByIdAndUpdate({_id:id}, data, { new: true })
-        // console.log(result);
-        // if (mongoose.Types.ObjectId.isValid(identifier)) {
-            // Handle ObjectId case (update by ObjectId)
-            result = await ordersModel.findByIdAndUpdate({ _id: identifier }, data, { new: true });
-        // } else {
-        //     // Handle custom '_id' field case (update by custom '_id' field)
-        //     result = await ordersModel.findOneAndUpdate({ _id: identifier }, data, { new: true });
-        // }
-
+        result = await ordersModel.findByIdAndUpdate({ _id: _id }, data, { new: true });
         successRes(res, 200, result)
     } catch (error) {
         console.log(error);
